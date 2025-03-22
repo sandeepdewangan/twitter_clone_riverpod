@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_clone_riverpod/features/auth/views/login_view.dart';
 import 'package:twitter_clone_riverpod/theme/app_theme.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: AppTheme.theme,
-      home: const MyHomePage(),
+      home: SafeArea(child: const LoginView()),
     );
   }
 }
