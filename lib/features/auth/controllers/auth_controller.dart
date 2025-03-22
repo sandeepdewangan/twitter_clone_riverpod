@@ -5,7 +5,7 @@ import 'package:twitter_clone_riverpod/apis/auth_api.dart';
 import 'package:twitter_clone_riverpod/apis/user_api.dart';
 import 'package:twitter_clone_riverpod/core/utils.dart';
 import 'package:twitter_clone_riverpod/features/auth/views/login_view.dart';
-import 'package:twitter_clone_riverpod/features/home/views/home_view.dart';
+import 'package:twitter_clone_riverpod/views/home_view.dart';
 import 'package:twitter_clone_riverpod/models/user_model.dart';
 
 // provide this class to world.
