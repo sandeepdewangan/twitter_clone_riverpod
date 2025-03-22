@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 class UserModel {
   final String email;
   final String name;
@@ -63,15 +62,15 @@ class UserModel {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      email: map['email'] as String,
-      name: map['name'] as String,
-      followers: List<String>.from((map['followers'] as List<String>)),
-      following: List<String>.from((map['following'] as List<String>)),
-      profilePic: map['profilePic'] as String,
-      banner: map['banner'] as String,
-      uid: map['uid'] as String,
-      bio: map['bio'] as String,
-      isTwitterBlue: map['isTwitterBlue'] as bool,
+      email: map['email'] ?? '',
+      name: map['name'] ?? '',
+      followers: List<String>.from(map['followers']),
+      following: List<String>.from(map['followers']),
+      profilePic: map['profilePic'] ?? '',
+      banner: map['banner'] ?? '',
+      uid: map['\$id'] ?? '',
+      bio: map['bio'] ?? '',
+      isTwitterBlue: map['isTwitterBlue'] ?? false,
     );
   }
 

@@ -25,6 +25,7 @@ class MyApp extends ConsumerWidget {
           .when(
             data: (user) {
               if (user != null) {
+                print("Current User is: ${user.$id} ${user.email}");
                 // user is logged in
                 return const HomeView();
               }

@@ -5,8 +5,8 @@ import 'package:twitter_clone_riverpod/apis/auth_api.dart';
 import 'package:twitter_clone_riverpod/apis/user_api.dart';
 import 'package:twitter_clone_riverpod/core/utils.dart';
 import 'package:twitter_clone_riverpod/features/auth/views/login_view.dart';
-import 'package:twitter_clone_riverpod/views/home_view.dart';
 import 'package:twitter_clone_riverpod/models/user_model.dart';
+import 'package:twitter_clone_riverpod/views/home_view.dart';
 
 // provide this class to world.
 final authControllerProvider = StateNotifierProvider<AuthController, bool>(
@@ -21,6 +21,19 @@ final authControllerProvider = StateNotifierProvider<AuthController, bool>(
 final currentUserAccountProvider = FutureProvider((ref) {
   final authController = ref.watch(authControllerProvider.notifier);
   return authController.currentUser();
+});
+
+// Future provider
+// provide this to get details of any user by passing uid outside using family.
+final userDetailsProvider = FutureProvider.family((ref, String uid) {
+  final authContoller = ref.watch(authControllerProvider.notifier);
+  return authContoller.getUserData(uid);
+});
+
+final currentUserDetailsProvider = FutureProvider((ref) {
+  final currentUserId = ref.watch(currentUserAccountProvider).value!.$id;
+  final userDetails = ref.watch(userDetailsProvider(currentUserId));
+  return userDetails.value;
 });
 
 class AuthController extends StateNotifier<bool> {
@@ -45,7 +58,7 @@ class AuthController extends StateNotifier<bool> {
     res.fold((failure) => showSnackBar(context, failure.message), (user) async {
       // on success
       // create db field of user
-      final saveUserResponse = await userApi.saveUserData(email);
+      final saveUserResponse = await userApi.saveUserData(email, user.$id);
       saveUserResponse.fold(
         (failure) => showSnackBar(context, failure.message),
         (success) {
@@ -75,5 +88,11 @@ class AuthController extends StateNotifier<bool> {
         MaterialPageRoute(builder: (context) => const HomeView()),
       );
     });
+  }
+
+  Future<UserModel> getUserData(String uid) async {
+    final document = await userApi.getUserData(uid);
+    final user = UserModel.fromMap(document!.data);
+    return user;
   }
 }

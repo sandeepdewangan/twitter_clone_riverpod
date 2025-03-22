@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:twitter_clone_riverpod/features/tweet/views/create_tweet.dart';
 
 // index provider
 final pageIndex = StateProvider((ref) => 0);
@@ -17,7 +18,13 @@ class HomeView extends ConsumerWidget {
           children: [Text("Home"), Text("Search"), Text("Notifcation")],
         ),
         floatingActionButton: FloatingActionButton.small(
-          onPressed: () {},
+          onPressed:
+              () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CreateTweetView(),
+                ),
+              ),
           child: Icon(Icons.add, size: 30),
         ),
         bottomNavigationBar: BottomNavigationBar(
