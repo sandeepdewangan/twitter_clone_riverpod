@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone_riverpod/commons/error_page.dart';
+import 'package:twitter_clone_riverpod/commons/loading_page.dart';
 import 'package:twitter_clone_riverpod/features/auth/controllers/auth_controller.dart';
 import 'package:twitter_clone_riverpod/features/auth/views/login_view.dart';
-import 'package:twitter_clone_riverpod/features/home/views/home_view.dart';
 import 'package:twitter_clone_riverpod/theme/app_theme.dart';
 
 void main() {
@@ -23,14 +23,14 @@ class MyApp extends ConsumerWidget {
           .watch(currentUserAccountProvider)
           .when(
             data: (user) {
-              if (user != null) {
-                // user is logged in
-                return const HomeView();
-              }
+              // if (user != null) {
+              //   // user is logged in
+              //   return const HomeView();
+              // }
               return const LoginView();
             },
             error: (error, _) => ErrorPage(error: error.toString()),
-            loading: () {},
+            loading: () => const LoadingPage(),
           ),
     );
   }
