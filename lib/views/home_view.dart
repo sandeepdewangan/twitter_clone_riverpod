@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:twitter_clone_riverpod/features/tweet/views/create_tweet.dart';
+import 'package:twitter_clone_riverpod/features/tweet/views/create_tweet_view.dart';
 
 // index provider
 final pageIndex = StateProvider((ref) => 0);
